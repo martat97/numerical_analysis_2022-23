@@ -113,7 +113,7 @@ At the end we obtain a **list of 6 trees**.
 
 **test_knn()** is the function that applies a query to the tree to find the nearest neighbour of each entry in the test dataset (**10000 observations**). An external library **Counter** was used to choose the most common category if you choose a **k > 1**. 
 
-After that, e check if the label is correct or if it is different from what we expected, finally we count the errors and compute the average.
+After that, we check if the label is correct or if it is different from what we expected, finally we count the errors and compute the average.
 
 We define a **new matrix** of **shape (2,3)** (for each n and for each distance function), it is called **k1_errors**, we have to apply test_knn function with a **k = 1**. 
 
