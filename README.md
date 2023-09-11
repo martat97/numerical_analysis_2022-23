@@ -107,7 +107,7 @@ From **sklearn.neighbors** we import **BallTree**, a package with all the functi
 
 We select the first 3200 images, we apply a reshape from 2D to 1D, then **build a tree** with **BallTree()** function. Then again with 6400.
 
-Notice that, precomputing all the first 6400 images reshaped was a possibility, was not applied because was not necessarily, the building of the trees is taking low time. Of course could have beeen considered if the time is too high.
+Notice that, precomputing all the first 6400 images reshaped was a possibility, was not applied because was not necessarily, the building of the trees is taking low time. Of course could have beeen considered if the time was too high.
 
 At the end we obtain a **list of 6 trees**.
 
