@@ -97,7 +97,7 @@ The error of **d_H1** is the **lower** with **n = 800**, but is **similar** with
 
 Of course we can consider the higher tolerance as a possible explanation of this, but even with that the error is still good. 
 
-We must take into consideration the fact that the error might me even lower we more accurate integrals, but the time is the problem.
+We must take into consideration the fact that the error might be even lower with more accurate integrals, but the higher time is the problem.
 
 ## Assignment 7
 
