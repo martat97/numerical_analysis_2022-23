@@ -62,7 +62,7 @@ Each image is interpeted as a continuous function with values between zero and o
 So we define the interpolation function for each of the first N = 1600 images, with **interpolate.interp2d** function (kind = 'linear')
 
 **H1** function is defined, following this steps: 
-- to compute a and b, integrals were computed with **integrate.nquad()** function
+- to compute **a** and **b**, integrals were computed with **integrate.nquad()** function
 - compute **(a - b)**
 - compute **gradient for x and y** with **gradient** function applied to **(a - b)**
 - the result of the distance is the sum of: square of **gradient x**, square of **gradient y**, square of **(a - b)**. numpy operators were used
@@ -79,7 +79,7 @@ We compute **H1 distance** of each pair of images, so we need to compute a new i
 
 The problem is that with default **epsrel** in **integrate.nquad** function, each integral is taking too long, around **2-3 seconds**.
 
-With* n = 1600, we need to compute more than **1 million integrals**, so we're speaking about more than **3 million seconds**, definitely too long.
+With **n = 1600**, we need to compute more than **1 million integrals**, so we're speaking about more than **3 million seconds**, definitely too long.
 
 To decrease time, a possible solution is to increase the **tolerance**. The integral is less accurate, but the time is lower.
 
