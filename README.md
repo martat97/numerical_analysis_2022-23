@@ -19,14 +19,71 @@ Numpy operators (np.max, np.sum, np.sqrt, np.abs) were used to define the three 
 ## Assignment 2
 
 The function **compute_dm** computes the distance matrix of shape (N,N) between the first N entries of x_train.
+
 An empty matrix is created with np.zeros((n,n)), then it is filled by computing a **dist** function (can be d_infty, d_one, d_two) between each pair of images. 
+
 Pay attention that we need to perform the minimum number of operations, so:
 - The matrix is symmetrical
-- The diagonal is always zero
+- The element in the diagonal is always zero (distance between identical images)
 
 ## Assignment 3
 
+**compute_dm** function is applied with n = 100 for each distance. 
 
+Then the function plt.imshow is used to plot each distance matrix, plt.subplot is used to compare the three plots in a single big plot.
+
+## Assignment 4
+
+We need to count the number of failures in **count_failures** function, in the iteration we find the min distance with np.argmin, not considering the value in the diagonal (is zero), so it is temporarily set to np.inf.
+
+If the prediction is wrong, error counter increments by one.
+The average error is computed, dividing the number of errors by the length of the distance matrix
+
+## Assignment 5
+
+We need to run the algorithm implemented above for N=100,200,400,800,1600 on the three different distances, and plot the three error rate as a function of N.
+
+So we create an empty matrix with np.zeros((5,3)) (5 different N and 3 distance functions) and we fill it calling count_failures() function at each iteration for each distance function. Elapsed time is computed as well for each n, we notice for n = 1600 that it is taking more than 1 minute, and it was a possibility to precompute a big distance matrix 1600x1600 for each distance, with the distance result in each cell. Then we could compute the error for each n iterating in the big matrix.
+
+The time wasn't that high so it was not necessarily, but the distance matrix will be precomputed in the next assignment.
+
+Then the plot shows the comparison between the average error of each distance, we immediately notice that d_infty is the worst one, and d_two is slightly better than d_one.
+
+## Assignment 6
+
+Each image is interpeted as a continuous function with values between zero and one, defined on a square domain \Omega=[0,27]x[0,27].
+
+So we define the interpolation function for each of the first N = 1600 images, with **interpolate.interp2d** function (kind = 'linear')
+
+H1 is defined, by this steps: 
+- compute a,b
+- compute (a - b)
+- compute gradient for x and y with **gradient** function applied to (a - b)
+- the result of the distance is the sum of: square of gradient x, square of gradient y, square of (a - b)
+- we need to integrate the result with omega domain
+- the final H1 distance is the sqrt of the integral of result.
+
+Precomputing Phase:
+- Images are interpolated in a new vector xi_train[1600]
+- Integrals of each image are precomputed in a new vector _xi_integrals[1600] (we don't need to compute the integral of an image again in the iteration to build distance matrix)
+
+Distance Matrix Bulding:
+- We compute H1 distance of each pair of images, so we need to compute a new integral for each pair of images (remember that the matrix is symmetrical and diagonal is zero)
+
+The problem is that with default epsrel in **integrate.nquad** function, each integral is taking too long, around 2-3 seconds.
+With n = 1600, we need to compute more than 1 million integrals, so we're speaking about more than 3 million seconds, definitely too long.
+To decrease time, it is a possibility is to increase the tolerance. The integral is less accurate, but the time is lower.
+
+By doing comparisons with a lower n (= 100), the result of the error is the same even computing the integral with tolerance of 100%, so for this algorithm it is not a problem (of course in general it is better to pay attention to not increasing epsrel too much).
+
+The time for each integral is decreased a lot, going from 2-3 seconds, to less than 0.02 seconds
+
+Now each H1 distance is stored in diffH1 matrix of shape 1600x1600, with even higher tolerance of 150%
+It took more than 1 hour to compute all the integrals even with higher tolerance, so in the future, parallelizing the operations in threads is a possibility to be considered (was not applied in this problem because it was not sustainable for my pc and 1 hour was still an acceptable time)
+
+Finally, the results for distance H1 are plotted as well to do comparisons with the other distances. The error of H1 is the lower with n = 800, but is similar with d_one, d_two with n = 1600. Of course we need to consider the higher tolerance as a possible explanation of this, but even with that the error is still good.
+
+## Assignment 7
 
 
 
