@@ -85,6 +85,27 @@ Finally, the results for distance H1 are plotted as well to do comparisons with 
 
 ## Assignment 7
 
+Now n = [3200, 6400], we need to build a Balltree for each distance and for each n. 
+
+From sklearn.neighbors we import BallTree, a package with all the functions we need.
+
+We select the first 3200 images, we apply a reshape from 2D to 1D, then create a tree with BallTree function.
+
+Notice that, precomputing all the first 6400 images reshaped was a possibility, was not applied because was not necessarily, the building of the trees is taking low time. Of course need to be considered if the time is too high.
+
+At the end we obtain a list of 6 trees.
+
+**test_knn** is the function that applies a query to the tree to find the nearest neighbour of each entry in the test dataset (10000 observations). An external library Counter was used to choose the most common category if you choose a k > 1. 
+
+Then we check if the label is correct or if it is different from what we expected, finally we count the errors and compute the average.
+
+We define a new matrix of shape (2,3) (for each distance function and for each n), it is called k1_errors, we have to apply test_knn function with a k = 1. Elapsed time is printed as well, it shows that it increases in respect to n. 
+
+The difference between the errors is plotted for each distance function in respect to the n. d_two seems the best one, d_infty is the worst.
+
+Errors are computed for k = 5 as well, to do comparison between k = 1. Again, the error is better with d_two, and the comparisons between the two different k makes it clear that the algorithm works better with an higher k.
+
+
 
 
 
