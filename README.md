@@ -1,4 +1,4 @@
-# Numerical Analysis Project 2022/23 - Marta Tosolini
+# Numerical Analysis - Project - Marta Tosolini
 
 ## Project description
 
